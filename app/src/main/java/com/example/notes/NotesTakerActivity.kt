@@ -14,13 +14,12 @@ class NotesTakerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNotesTakerBinding
     private lateinit var notes: Notes
-    var isBeingEdited = false;
+    private var isBeingEdited = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNotesTakerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         try {
             notes = intent.getSerializableExtra("old_note") as Notes
@@ -35,16 +34,14 @@ class NotesTakerActivity : AppCompatActivity() {
             val title = binding.editTitle.text.toString()
             val textBody = binding.editNotes.text.toString()
 
-            if (textBody.isEmpty()) {
+            if (textBody.isEmpty())
                 Toast.makeText(this, "Add notes", Toast.LENGTH_SHORT).show()
-            }
 
-            val format = SimpleDateFormat("dd MM yyy HH:mm a")
+            val format = SimpleDateFormat("dd MM yyy HH:mm a", Locale.GERMANY)
             val date = Date()
 
-            if(!isBeingEdited) {
+            if (!isBeingEdited)
                 notes = Notes()
-            }
 
             notes.title = title
             notes.noteText = textBody
@@ -55,8 +52,6 @@ class NotesTakerActivity : AppCompatActivity() {
             intent.putExtra("note", notes)
             setResult(Activity.RESULT_OK, intent)
             finish()
-
-
         }
     }
 }

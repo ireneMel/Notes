@@ -43,6 +43,10 @@ android {
 }
 
 dependencies {
+
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
     // lifecycleScope:
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-rc02'
 

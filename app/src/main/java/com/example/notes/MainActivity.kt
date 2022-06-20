@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         database = NotesRoomDatabase.getInstance(this)
 
+        //initialize notesList
         getNotes()
 
         binding.fabAdd.setOnClickListener {
@@ -55,23 +55,10 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                filter(newText)
+                SearchNotes.filter(newText, notesList, noteListAdapter)
                 return true
             }
-
         })
-    }
-
-    private fun filter(newText: String?) {
-        val filteredList = ArrayList<Notes>()
-        for (note in notesList) {
-            if (note.title.lowercase().contains(newText?.lowercase() ?: "error")
-                || note.noteText.lowercase().contains(newText?.lowercase() ?: "error")
-            ) {
-                filteredList.add(note)
-            }
-        }
-        noteListAdapter.filterList(filteredList)
     }
 
     private val getResultAddNewNote =
@@ -80,9 +67,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
                 val data: Intent? = result.data
                 val newNotes: Notes = data?.getSerializableExtra("note") as Notes
                 database.notesDAO().insert(newNotes)
-                notesList.clear()
-                notesList.addAll(database.notesDAO().getAllNotes())
-                noteListAdapter.notifyDataSetChanged()
+                clearAddNotify()
             }
         }
 
@@ -92,12 +77,15 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
                 val data: Intent? = result.data
                 val newNotes = data?.getSerializableExtra("note") as Notes
                 database.notesDAO().update(newNotes.id, newNotes.title, newNotes.noteText)
-                notesList.clear()
-                notesList.addAll(database.notesDAO().getAllNotes())
-                noteListAdapter.notifyDataSetChanged()
+                clearAddNotify()
             }
         }
 
+    private fun clearAddNotify() {
+        notesList.clear()
+        notesList.addAll(database.notesDAO().getAllNotes())
+        noteListAdapter.notifyDataSetChanged()
+    }
 
     private fun updateRecycler(notesLocal: List<Notes>) {
         binding.recyclerHome.setHasFixedSize(true)
@@ -105,7 +93,6 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         noteListAdapter = NotesListAdapter(this, notesClickListener, notesLocal)
         binding.recyclerHome.adapter = noteListAdapter
-
     }
 
     private lateinit var selectedNote: Notes
@@ -141,9 +128,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
                     database.notesDAO().pin(selectedNote.id, true)
                     Toast.makeText(this, "pinned", Toast.LENGTH_SHORT).show()
                 }
-                notesList.clear()
-                notesList.addAll(database.notesDAO().getAllNotes())
-                noteListAdapter.notifyDataSetChanged()
+                clearAddNotify()
                 return true
             }
             R.id.delete -> {

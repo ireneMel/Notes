@@ -10,10 +10,10 @@ import com.example.notes.models.Notes
 
 class NotesListAdapter() : Adapter<NotesViewHolder>() {
 
-    lateinit var context: Context
-    lateinit var listener: NotesClickListener
+    private lateinit var context: Context
+    private lateinit var listener: NotesClickListener
 
-    var data = listOf<Notes>()
+    private var data = listOf<Notes>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -53,12 +53,12 @@ class NotesListAdapter() : Adapter<NotesViewHolder>() {
 
         holder.cardView.setOnClickListener {
             listener.onClick(
-                data[holder.adapterPosition]
+                data[holder.bindingAdapterPosition]
             )
         }
 
         holder.cardView.setOnLongClickListener {
-            listener.onLongClick(data[holder.adapterPosition], holder.cardView)
+            listener.onLongClick(data[holder.bindingAdapterPosition], holder.cardView)
             return@setOnLongClickListener true
         }
     }
@@ -66,12 +66,12 @@ class NotesListAdapter() : Adapter<NotesViewHolder>() {
     override fun getItemCount() = data.size
 
     fun filterList(filterList: List<Notes>) {
-        data = filterList;
+        data = filterList
         notifyDataSetChanged()
     }
 
     private fun getColor(): Int {
-        val colors = listOf(R.color.pink, R.color.red, R.color.orange, R.color.violet)
+        val colors = listOf(R.color.pink, R.color.red, R.color.yellow, R.color.violet, R.color.blue)
         return colors.random()
     }
 }

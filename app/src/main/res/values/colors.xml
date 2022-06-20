@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- theme colors -->
     <color name="gray">#465351</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -13,11 +14,13 @@
     <color name="secondary_dark">#004a3f</color>
 
     <!--  colors for notes templates  -->
-    <color name="pink">#AB56AE</color>
-    <color name="red">#AC4857</color>
-    <color name="orange">#A16C55</color>
-    <color name="violet">#523777</color>
+    <color name="red">#EC9C99</color>
+    <color name="yellow">#ECE499</color>
+    <color name="blue">#787AE1</color>
+    <color name="violet">#A682D8</color>
+    <color name="pink">#D98CDB</color>
 
+    <!-- background colors -->
     <color name="very_light_green">#C7EAC8</color>
     <color name="secondary_very_light">#BCDCD7</color>
 </resources>

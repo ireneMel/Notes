@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Notes</string>
     <string name="add_new_note">Add new note</string>
+    <string name="title">Title</string>
+    <string name="text_example">Text here</string>
+    <string name="date_format">dd MMM yyyy</string>
+    <string name="descr_pin">Pin image</string>
+    <string name="save_button">save button</string>
+    <string name="hint_notes_field">Write your text here</string>
+    <string name="pin_unpin">pin/unpin</string>
+    <string name="delete">delete</string>
 </resources>

@@ -36,13 +36,23 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+    // lifecycleScope:
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-rc02'
+
+    // viewModelScope:
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-rc02'
 
     //room components
     kapt "androidx.room:room-compiler:2.4.2"
     implementation("androidx.room:room-runtime:2.4.2")
+    implementation("androidx.room:room-ktx:2.4.2")
     annotationProcessor("androidx.room:room-compiler:2.4.2")
 
     implementation 'androidx.core:core-ktx:1.8.0'

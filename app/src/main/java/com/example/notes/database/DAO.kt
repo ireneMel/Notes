@@ -1,6 +1,5 @@
 package com.example.notes.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -19,23 +18,33 @@ and then called from a coroutine or from another suspension function.
 @Dao
 interface DAO {
 
+    //TODO add suspend
+
     @Insert(onConflict = REPLACE)
-    suspend fun insert(notes: Notes)
+    fun insert(notes: Notes)
 
     @Query(
         "UPDATE notes SET title = :title, " +
                 "noteText = :noteText WHERE id = :id"
     )
-    suspend fun update(id: Int, title: String, noteText: String)
+    fun update(id: Int, title: String, noteText: String)
 
     @Delete
-    suspend fun delete(notes: Notes)
+    fun delete(notes: Notes)
+
 
     @Query("DELETE FROM notes")
-    suspend fun deleteAll()
+    fun deleteAll()
 
     //TODO replace id with date?
+    //TODO LiveData<List<Notes>>
     @Query("SELECT * FROM notes ORDER BY id DESC")
-    fun getAllNotes(): LiveData<List<Notes>>
+    //suspend
+    fun getAllNotes(): List<Notes>
+
+    @Query("UPDATE notes SET isPinned = :isPinned WHERE id =:id")
+    fun pin(id: Int, isPinned: Boolean) {
+
+    }
 
 }

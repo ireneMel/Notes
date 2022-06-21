@@ -49,7 +49,7 @@ class NotesListAdapter() : Adapter<NotesViewHolder>() {
         else
             holder.imagePin.setImageResource(0)
 
-        holder.cardView.setBackgroundColor(holder.itemView.resources.getColor(getColor(), null))
+        holder.cardView.setBackgroundColor(holder.itemView.resources.getColor(R.color.violet, null))
 
         holder.cardView.setOnClickListener {
             listener.onClick(

@@ -21,20 +21,18 @@ interface DAO {
     //TODO add suspend
 
     @Insert(onConflict = REPLACE)
+//    suspend
     fun insert(notes: Notes)
+
+    @Delete
+    fun delete(notes: Notes)
 
     @Query(
         "UPDATE notes SET title = :title, " +
                 "noteText = :noteText WHERE id = :id"
     )
+//    suspend
     fun update(id: Int, title: String, noteText: String)
-
-    @Delete
-    fun delete(notes: Notes)
-
-
-    @Query("DELETE FROM notes")
-    fun deleteAll()
 
     //TODO replace id with date?
     //TODO LiveData<List<Notes>>
@@ -43,8 +41,7 @@ interface DAO {
     fun getAllNotes(): List<Notes>
 
     @Query("UPDATE notes SET isPinned = :isPinned WHERE id =:id")
-    fun pin(id: Int, isPinned: Boolean) {
-
-    }
+//    suspend
+    fun pin(id: Int, isPinned: Boolean)
 
 }

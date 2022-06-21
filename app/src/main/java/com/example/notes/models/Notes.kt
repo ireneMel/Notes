@@ -1,6 +1,5 @@
 package com.example.notes.models
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,23 +8,21 @@ import java.io.Serializable
 //1
 
 @Entity(tableName = "notes")
-class Notes : Serializable {
-
-    @NonNull
+data class Notes(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id = 0
+    var id: Int = 0,
 
     @ColumnInfo(name = "title")
-    var title:String = ""
+    var title: String = "",
 
     @ColumnInfo(name = "noteText")
-    var noteText:String = ""
+    var noteText: String = "",
 
     @ColumnInfo(name = "date")
-    var date:String=""
+    var date: String = "",
 
     @ColumnInfo(name = "isPinned")
-    var isPinned = false
+    var isPinned: Boolean = false
 
-}
+) : Serializable

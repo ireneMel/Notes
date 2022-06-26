@@ -8,7 +8,7 @@ import java.io.Serializable
 //1
 
 @Entity(tableName = "notes")
-data class Notes(
+data class Note(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0,

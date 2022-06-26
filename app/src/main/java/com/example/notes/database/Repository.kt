@@ -13,14 +13,12 @@ class Repository {
     companion object {
         private var notesRoomDatabase: NotesRoomDatabase? = null
 
-
         private fun initDB(context: Context): NotesRoomDatabase? {
             return NotesRoomDatabase.getInstance(context)
         }
 
         fun insert(context: Context, note: Note) {
             notesRoomDatabase = initDB(context)
-
             CoroutineScope(IO).launch {
                 notesRoomDatabase?.notesDAO()?.insert(note)
             }
@@ -31,7 +29,6 @@ class Repository {
             return notesRoomDatabase?.notesDAO()?.getAllNotes()
         }
 
-        //TODO redo update?
         fun update(context: Context, note: Note) {
             notesRoomDatabase = initDB(context)
             CoroutineScope(IO).launch {
@@ -44,6 +41,16 @@ class Repository {
             CoroutineScope(IO).launch {
                 notesRoomDatabase?.notesDAO()?.delete(note)
             }
+        }
+
+        fun pin(context: Context, note: Note, isPinned: Boolean) {
+            notesRoomDatabase = initDB(context)
+            notesRoomDatabase?.notesDAO()?.pin(note.id, isPinned)
+        }
+
+        fun search(context: Context, data: String): LiveData<List<Note>>? {
+            notesRoomDatabase = initDB(context)
+            return notesRoomDatabase?.notesDAO()?.search(data)
         }
     }
 }

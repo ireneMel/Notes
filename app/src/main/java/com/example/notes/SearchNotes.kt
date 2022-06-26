@@ -1,7 +1,7 @@
 package com.example.notes
 
 import com.example.notes.adapters.NotesListAdapter
-import com.example.notes.models.Notes
+import com.example.notes.models.Note
 
 class SearchNotes {
 
@@ -9,10 +9,10 @@ class SearchNotes {
 
         fun filter(
             newText: String?,
-            notesList: List<Notes>,
+            notesList: List<Note>,
             noteListAdapter: NotesListAdapter
         ) {
-            val filteredList = ArrayList<Notes>()
+            val filteredList = ArrayList<Note>()
             for (note in notesList) {
                 if (note.title.lowercase().contains(newText?.lowercase() ?: "error")
                     || note.noteText.lowercase().contains(newText?.lowercase() ?: "error")

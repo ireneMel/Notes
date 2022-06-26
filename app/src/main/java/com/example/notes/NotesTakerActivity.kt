@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.notes.databinding.ActivityNotesTakerBinding
-import com.example.notes.models.Notes
+import com.example.notes.models.Note
 import java.text.SimpleDateFormat
 import java.util.*
 
 class NotesTakerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNotesTakerBinding
-    private lateinit var notes: Notes
+    private lateinit var notes: Note
     private var isBeingEdited = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class NotesTakerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         try {
-            notes = intent.getSerializableExtra("old_note") as Notes
+            notes = intent.getSerializableExtra("old_note") as Note
             binding.editTitle.setText(notes.title)
             binding.editNotes.setText(notes.noteText)
             isBeingEdited = true
@@ -41,7 +41,7 @@ class NotesTakerActivity : AppCompatActivity() {
             val date = Date()
 
             if (!isBeingEdited)
-                notes = Notes()
+                notes = Note()
 
             notes.title = title
             notes.noteText = textBody

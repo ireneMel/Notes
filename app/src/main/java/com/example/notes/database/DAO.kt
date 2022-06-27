@@ -1,8 +1,11 @@
 package com.example.notes.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.Query
 import com.example.notes.models.Note
 
 //2
@@ -17,16 +20,16 @@ and then called from a coroutine or from another suspension function.
 interface DAO {
 
     @Insert(onConflict = REPLACE)
-    fun insert(notes: Note)
+    suspend fun insert(notes: Note)
 
     @Delete
-    fun delete(notes: Note)
+    suspend fun delete(notes: Note)
 
     @Query(
         "UPDATE notes SET title = :title, " +
                 "noteText = :noteText WHERE id = :id"
     )
-    fun update(id: Int, title: String, noteText: String)
+    suspend fun update(id: Int, title: String, noteText: String)
 
     @Query("SELECT * FROM notes ORDER BY id DESC")
     fun getAllNotes(): LiveData<List<Note>>

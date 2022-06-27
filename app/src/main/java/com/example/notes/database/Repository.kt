@@ -2,6 +2,7 @@ package com.example.notes.database
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.example.notes.models.Note
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
